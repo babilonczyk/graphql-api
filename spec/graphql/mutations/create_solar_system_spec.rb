@@ -1,0 +1,42 @@
+require "rails_helper"
+
+describe "createSolarSystem Mutation", type: :request do
+  subject { post graphql_path, params: { query: query } }
+
+  let(:query) do
+    <<~GQL
+      mutation {
+        createSolarSystem(
+          name: "Solar System"
+          description: "The Solar System is the gravitationally bound system of the Sun and the objects that orbit it, either directly or indirectly."
+          ageInBn: 4.6
+        ) {
+          name
+          description
+          ageInBn
+        }
+      }
+    GQL
+  end
+
+  context "when authentication passed" do
+    it "returns a successful response" do
+      subject
+      expect(response).to be_successful
+    end
+
+    it "returns the correct data" do
+      subject
+      json = JSON.parse(response.body)
+
+      expect(json["data"]["createSolarSystem"]).to eq(
+        {
+          "name" => "Solar System",
+          "description" => "The Solar System is the gravitationally bound system of the Sun and the objects that orbit it, either directly or indirectly.",
+          "ageInBn" => 4.6
+        }
+      )
+    end
+  end
+
+end
