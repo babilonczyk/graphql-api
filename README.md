@@ -1,24 +1,25 @@
-# README
+# GraphQL API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is small graphQL API written in Ruby on Rails. The purpose of this was to dig into how GraphQL works, so it doesn't handle Authentication and Authorization. 
 
-Things you may want to cover:
+```mermaid
+---
+Entities
+---
+erDiagram
+    SOLAR_SYSTEM ||--|| STAR : "1 to 1"
+    SOLAR_SYSTEM ||--|{ PLANETS : "1 to n"
+```
 
-* Ruby version
+How to start:
+  * run `rails db:migrate`
+  * run `rails db:seed` to populate your db with data of our Solar System
+  * run `rails s`
+  * download [GraphiQL](https://github.com/graphql/graphiql) app - playground for GraphQL 
+  * use `http://localhost:3000/graphql` endpoint
 
-* System dependencies
+I've included example queries and mutations in specs. 
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+To Do:
+- [ ] Add mutations for Stars and Planets
+- [ ] Add Authentication & Authorization
