@@ -1,4 +1,5 @@
 class Types::SolarSystemType < Types::BaseObject
+  graphql_name "SolarSystemType"
   description "This type represents a solar system"
 
   field :id, ID, null: false

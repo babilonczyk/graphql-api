@@ -1,4 +1,5 @@
 class Types::PlanetType < Types::BaseObject
+  graphql_name "PlanetType"
   description "This type represents a star"
 
   field :id, ID, null: false

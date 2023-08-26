@@ -1,13 +1,10 @@
 class Mutations::CreateSolarSystem < GraphQL::Schema::Mutation
-  argument :name, String, required: true
-  argument :age_in_bn, Float, required: true
-  argument :description, String, required: true
+  argument :input, Types::SolarSystemInputType, required: true, 
+    description: "Input attributes for creating a solar system"
 
-  def resolve(name:, age_in_bn:, description:)
-    SolarSystem.create!(
-      name: name,
-      age_in_bn: age_in_bn,
-      description: description
-    )
+  payload_type Types::SolarSystemType
+
+  def resolve(input:)
+    SolarSystem.create!(input.to_h)
   end
 end

@@ -1,4 +1,5 @@
 class Types::StarType < Types::BaseObject
+  graphql_name "StarType"
   description "This type represents a star"
 
   field :id, ID, null: false

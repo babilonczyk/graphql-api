@@ -1,21 +1,31 @@
 require "rails_helper"
 
 describe "updateSolarSystem Mutation", type: :request do
-  subject { post graphql_path, params: { query: query } }
+  subject { post graphql_path, params: { query: query, variables: variables }, as: :json }
 
   let!(:solar_system) { create(:solar_system) }
 
+  let(:input) do
+    {
+      name: "Solar System",
+      description: "The Solar System is the gravitationally bound system of the Sun and the objects that orbit it, either directly or indirectly.",
+      ageInBn: 1.6
+    }
+  end
+
   let(:query) do
     <<~GQL
-      mutation {
-        updateSolarSystem(
-          id: #{solar_system.id}
-          name: "Solar System"
-          description: "The Solar System is the gravitationally bound system of the Sun and the objects that orbit it, either directly or indirectly."
-          ageInBn: 1.6
-        )
+      mutation updateSolarSystem($id: ID!, $input: SolarSystemInputType!) {
+        updateSolarSystem(id: $id, input: $input)
       }
     GQL
+  end
+
+  let(:variables) do
+    {
+      id: solar_system.id,
+      input: input
+    }
   end
 
   context "when authentication passed" do

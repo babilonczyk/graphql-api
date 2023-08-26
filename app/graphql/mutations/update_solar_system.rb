@@ -1,16 +1,15 @@
 class Mutations::UpdateSolarSystem < GraphQL::Schema::Mutation
   argument :id, ID, required: true
-  argument :name, String, required: false
-  argument :age_in_bn, Float, required: false
-  argument :description, String, required: false
+  argument :input, Types::SolarSystemInputType, required: true, 
+    description: "Input attributes for updating a solar system"
 
   payload_type Boolean
 
-  def resolve(id:, **attributes)
+  def resolve(id:, input:)
     solar_system = SolarSystem.find_by(id:)
 
     false if solar_system.nil?
     
-    solar_system.update!(attributes) 
+    solar_system.update!(input.to_h) 
   end
 end
