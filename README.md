@@ -8,7 +8,7 @@ Entities
 ---
 erDiagram
     SOLAR_SYSTEM ||--|| STAR : "1 to 1"
-    SOLAR_SYSTEM ||--|{ PLANETS : "1 to n"
+    SOLAR_SYSTEM ||--|{ PLANET : "1 to n"
 ```
 
 How to start:
